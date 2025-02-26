@@ -5,7 +5,7 @@ class VideoBaseSchema(BaseModel):
     youtube_url: str
 
 
-class VideoRequestSchema(VideoBaseSchema):
+class VideoCreateSchema(VideoBaseSchema):
     pass
 
 
@@ -15,3 +15,8 @@ class VideoResponseSchema(VideoBaseSchema):
     summary: str
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class VideoListSchema(VideoBaseSchema):
+    id: int
+    summary: str
