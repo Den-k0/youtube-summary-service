@@ -4,15 +4,12 @@ from schemas import VideoCreateSchema
 
 
 def create_video(
-    db: Session,
-    video_data: VideoCreateSchema,
-    transcript: str,
-    summary: str
+    db: Session, video_data: VideoCreateSchema, transcript: str, summary: str
 ) -> Video:
     db_video = Video(
         youtube_url=video_data.youtube_url,
         transcript=transcript,
-        summary=summary
+        summary=summary,
     )
     db.add(db_video)
     db.commit()

@@ -11,11 +11,12 @@ app = FastAPI()
 
 
 @app.post("/process-video/", response_model=VideoResponseSchema)
-def process_video(
-    request: VideoCreateSchema,
-    db: Session = Depends(get_db)
-):
-    existing_video = db.query(Video).filter(Video.youtube_url == request.youtube_url).first()
+def process_video(request: VideoCreateSchema, db: Session = Depends(get_db)):
+    existing_video = (
+        db.query(Video)
+        .filter(Video.youtube_url == request.youtube_url)
+        .first()
+    )
     if existing_video:
         return existing_video
 
