@@ -6,6 +6,26 @@ from src.config import SUPADATA_API_KEY, GROQ_API_KEY, GROQ_MODEL
 
 
 def get_transcript(youtube_url: str) -> str:
+    """
+    Get the transcript of a YouTube video from Supadata API.
+
+    This function sends a GET request to the Supadata API to fetch
+    the transcript of the YouTube video specified by the URL. If the
+    request is successful, it returns the transcript content as a string.
+
+    The `SUPADATA_API_KEY` is retrieved from the 'config.py' file.
+
+    Args:
+        youtube_url (str): The URL of the YouTube
+        video to fetch the transcript for.
+
+    Returns:
+        str: The transcript content of the video,
+        or an empty string if no content is found.
+
+    Raises:
+        HTTPException: If the API response status code is not 200.
+    """
     response = requests.get(
         f"https://api.supadata.ai/v1/youtube/transcript?url={youtube_url}&text=true",
         headers={"x-api-key": SUPADATA_API_KEY},
@@ -22,6 +42,26 @@ def get_transcript(youtube_url: str) -> str:
 
 
 def get_summary(transcript: str) -> str:
+    """
+    Get a summary of the transcript using the Groq API.
+
+    This function sends a request to the Groq API to generate a summary of the
+    provided transcript. It uses the Groq model specified by the environment
+    variable `GROQ_MODEL` to generate the summary. The transcript is trimmed to
+    a length of 6000 characters before being sent to the API.
+
+    The `GROQ_API_KEY` is retrieved from the 'config.py' file.
+
+    Args:
+        transcript (str): The transcript to summarize.
+
+    Returns:
+        str: The summary of the transcript provided by the Groq API.
+
+    Raises:
+        Exception: If the Groq API fails
+        to return a response or an error occurs.
+    """
     client = Groq(api_key=GROQ_API_KEY)
 
     transcript_trimmed = transcript[:6000]

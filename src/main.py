@@ -21,6 +21,21 @@ app = FastAPI()
     ),
 )
 def process_video(request: VideoCreateSchema, db: Session = Depends(get_db)):
+    """
+    Processes a YouTube video by the provided URL,
+    generates a transcript and summary, and stores
+    the video information in the database.
+
+    If the video already exists in the database
+    (based on the URL), it returns the existing video.
+
+    Parameters:
+        request (VideoCreateSchema): Video data including the YouTube URL.
+        db (Session): Database session for accessing the database.
+
+    Returns:
+        VideoResponseSchema: The video with its transcript and summary.
+    """
     existing_video = (
         db.query(Video)
         .filter(Video.youtube_url == request.youtube_url)
@@ -45,4 +60,14 @@ def process_video(request: VideoCreateSchema, db: Session = Depends(get_db)):
     ),
 )
 def get_videos(db: Session = Depends(get_db)):
+    """
+    Returns a list of all processed videos from the database,
+    including their ids, transcripts, and summaries.
+
+    Parameters:
+        db (Session): Database session for accessing the database.
+
+    Returns:
+        list[VideoListSchema]: A list of videos with their data.
+    """
     return get_all_videos(db)

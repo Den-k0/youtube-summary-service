@@ -13,6 +13,15 @@ Base = declarative_base()
 
 
 def get_db() -> Session:
+    """
+    Get a new database session.
+
+    This function is used to get a session for interacting with the database.
+    It creates a new session and closes it after use.
+
+    Returns:
+        Session: A new session instance for database interaction.
+    """
     db = SessionLocal()
     try:
         yield db
