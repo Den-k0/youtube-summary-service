@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from models import Video
-from schemas import VideoCreateSchema
+from src.models import Video
+from src.schemas import VideoCreateSchema
 
 
 def create_video(

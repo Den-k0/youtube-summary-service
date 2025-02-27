@@ -1,11 +1,11 @@
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 
-from crud import create_video, get_all_videos
-from database import get_db
-from models import Video
-from schemas import VideoCreateSchema, VideoResponseSchema, VideoListSchema
-from services import get_transcript, get_summary
+from src.crud import create_video, get_all_videos
+from src.database import get_db
+from src.models import Video
+from src.schemas import VideoCreateSchema, VideoResponseSchema, VideoListSchema
+from src.services import get_transcript, get_summary
 
 app = FastAPI()
 
