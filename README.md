@@ -73,3 +73,12 @@ To run the application locally, use:
 ```bash
 poetry run uvicorn src.main:app --host 0.0.0.0 --port 8000
 ```
+
+## Swagger Documentation
+
+To access the Swagger documentation for the API, navigate to:
+```bash
+http://localhost:8000/docs
+```
+
+![Swagger Documentation](swagger.jpg)
