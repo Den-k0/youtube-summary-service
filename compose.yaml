@@ -1,0 +1,10 @@
+services:
+  server:
+    build:
+      context: .
+    volumes:
+      - ./youtube_summary_service.db:/app/youtube_summary_service.db
+    env_file:
+      - .env
+    ports:
+      - 8000:8000
