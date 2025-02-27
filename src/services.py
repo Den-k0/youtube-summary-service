@@ -1,19 +1,8 @@
-import os
-
 import requests
-from dotenv import load_dotenv
 from fastapi import HTTPException
 from groq import Groq
 
-load_dotenv()
-
-SUPADATA_API_KEY = os.getenv("SUPADATA_API_KEY")
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-
-GROQ_MODEL = "llama-3.3-70b-versatile"
-
-if not SUPADATA_API_KEY or not GROQ_API_KEY:
-    raise ValueError("API keys are missing!")
+from src.config import SUPADATA_API_KEY, GROQ_API_KEY, GROQ_MODEL
 
 
 def get_transcript(youtube_url: str) -> str:
