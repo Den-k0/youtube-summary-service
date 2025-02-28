@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from src.crud import create_video, get_all_videos
@@ -36,11 +37,10 @@ def process_video(request: VideoCreateSchema, db: Session = Depends(get_db)):
     Returns:
         VideoResponseSchema: The video with its transcript and summary.
     """
-    existing_video = (
-        db.query(Video)
-        .filter(Video.youtube_url == request.youtube_url)
-        .first()
-    )
+    existing_video = db.execute(
+        select(Video).where(Video.youtube_url == request.youtube_url)
+    ).scalar_one_or_none()
+
     if existing_video:
         return existing_video
 

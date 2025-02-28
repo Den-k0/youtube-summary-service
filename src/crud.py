@@ -1,3 +1,4 @@
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 from src.models import Video
 from src.schemas import VideoCreateSchema
@@ -40,8 +41,6 @@ def create_video(
 
 def get_all_videos(db: Session):
     """
-    Get all videos from the database.
-
     This function queries the database and retrieves
     all video records stored in the `Video` table.
 
@@ -54,4 +53,4 @@ def get_all_videos(db: Session):
     Raises:
         SQLAlchemyError: If there is an issue with the database operation.
     """
-    return db.query(Video).all()
+    return db.scalars(select(Video)).all()
