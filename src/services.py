@@ -69,7 +69,14 @@ def get_summary(transcript: str) -> str:
     chat_completion = client.chat.completions.create(
         messages=[
             {
-                "role": "system", "content": "You are a helpful assistant."
+                "role": "system",
+                "content": (
+                    "You are a helpful assistant. Your task is to provide"
+                    "a summary for the user's request. Return only the"
+                    "summary without any additional information."
+                    "If the user discusses dangerous or illegal topics,"
+                    "respond with: I couldn't process this information."
+                ),
             },
             {
                 "role": "user",
