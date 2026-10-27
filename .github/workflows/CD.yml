@@ -17,6 +17,10 @@ jobs:
         run: docker build -t youtube-summary-service:latest .
 
       - name: Deploy with Docker Compose
+        env:
+          SUPADATA_API_KEY: ${{ secrets.SUPADATA_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GROQ_MODEL: ${{ secrets.GROQ_MODEL }}
         run: docker compose up -d
 
       - name: Verify Running Container
